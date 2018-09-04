@@ -87,7 +87,8 @@ echo 'Checking config'
 echo 
 sudo nginx -t
 echo 'Press [ENTER] if all good OR' 
-read -p '[ctl-C] if there is a problem:' bob 
+echo '[ctl-C] if there is a problem:'
+read -p 'Restart Nginx? ' bob 
 
 echo 
 echo 'restarting nginx'
