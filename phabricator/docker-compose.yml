@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - MARIADB_ROOT_PASSWORD=currentlyinbeta
+    volumes:
+      - './data/mariadb_data:/bitnami'
+  phabricator:
+    image: 'bitnami/phabricator:latest'
+    environment:
+      - PHABRICATOR_USERNAME=jakobdaugherty
+      - PHABRICATOR_PASSWORD=currentlyinbeta
+      - MARIADB_PASSWORD=currentlyinbeta
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '8081:80'
+      - '4433:443'
+    volumes:
+      - './data/phabricator_data:/bitnami'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  phabricator_data:
+    driver: local
